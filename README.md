@@ -1,5 +1,4 @@
-#[![Build Status](https://travis-ci.org/lbischof/ansible-role-pass.svg?branch=master)](https://travis-ci.org/lbischof/ansible-role-pass)
-#[![Galaxy Role](https://img.shields.io/badge/ansible--galaxy-pass-blue.svg)](https://galaxy.ansible.com/lbischof/pass/)
+[![Build Status](https://travis-ci.org/cjsteel/ansible-role-pass.svg?branch=master)](https://travis-ci.org/cjsteel/ansible-role-pass)
 
 
 Pass Ansible Role

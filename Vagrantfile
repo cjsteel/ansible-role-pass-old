@@ -15,6 +15,10 @@ Vagrant.configure(2) do |config|
     trusty.vm.box = "ubuntu/trusty64"
   end
 
+  config.vm.define "xenial" do |xenial|
+    xenial.vm.box = "ubuntu/xenial64"
+  end
+
   config.vm.define "centos7" do |centos7|
     centos7.vm.box = "centos/7"
   end

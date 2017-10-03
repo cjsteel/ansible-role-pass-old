@@ -1,4 +1,19 @@
 ---
 - hosts: all
+  become: true
+  gather_facts: false
+
+  pre_tasks:
+
+  - name: "Ensure that our target has python2.x for Ansible gather facts (Ubuntu 16.04 does not)"
+    raw: bash -c "test -e /usr/bin/python || (apt -qqy update && apt install -qqy python-minimal)"
+    register: output
+    changed_when:
+    - output.stdout != ""
+    - output.stdout != "\r\n"
+
+  - name: Now that Python 2.7 is installed we can gather our facts
+    setup:
+
   roles:
     - ansible-role-pass

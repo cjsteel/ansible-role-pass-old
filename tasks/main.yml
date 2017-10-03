@@ -1,14 +1,8 @@
 ---
 # tasks file for ansible-role-pass
 
-- include: packages-apt.yml
-  when: ansible_pkg_mgr == 'apt'
-
-- include: packages-yum.yml
-  when: ansible_pkg_mgr == 'yum'
-
-- include: packages-dnf.yml
-  when: ansible_pkg_mgr == 'dnf'
+- include: centos.yml
+  when: ansible_distribution == 'CentOS'
 
 - name: Set pass temporary location
   set_fact: pass_home={{ansible_env.HOME}}/.pass

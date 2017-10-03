@@ -15,5 +15,8 @@
   - name: Now that Python 2.7 is installed we can gather our facts
     setup:
 
+- hosts: all
+  become: false
+
   roles:
     - ansible-role-pass

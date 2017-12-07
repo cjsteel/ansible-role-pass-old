@@ -5,18 +5,20 @@
 
   pre_tasks:
 
-  - name: "Ensure that our target has python2.x for Ansible gather facts (Ubuntu 16.04 does not)"
+  - name: "Ensure that our target has python2.x for Ansible gather facts (Sometimes Ubuntu 16.04 does not)"
     raw: bash -c "test -e /usr/bin/python || (apt -qqy update && apt install -qqy python-minimal)"
     register: output
     changed_when:
     - output.stdout != ""
     - output.stdout != "\r\n"
+#    when: ansible_pkg_mgr == 'apt'
 
-  - name: Now that Python 2.7 is installed we can gather our facts
+  - name: "Now that we are sure Python 2.7 is installed we can gather our facts"
     setup:
 
 - hosts: all
   become: false
-
+  gather_facts: true
   roles:
-    - ansible-role-pass
+
+    - pass

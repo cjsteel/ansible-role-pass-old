@@ -1,0 +1,12 @@
+---
+
+# Requirements (on host that executes module)
+#
+#  python-apt (python 2)
+#  python3-apt (python 3)
+#  aptitude (before 2.4)
+
+- name: Install dependencies
+  apt: name={{item}}
+  become: yes
+  with_items: "{{pass_packages}}"

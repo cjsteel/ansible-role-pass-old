@@ -12,15 +12,17 @@
     changed_when:
     - output.stdout != ""
     - output.stdout != "\r\n"
-#    when: ansible_pkg_mgr == 'apt'
+    ignore_errors: yes
+
 
   - name: "Now that we are sure Python 2.7 is installed we can gather our facts"
     setup:
 
   roles:
 
+    - epel
     - haveged
-    - { role: gpg_key, ansible_user: ubuntu }
+    - { role: gpg, ansible_user: ubuntu }
 
 - hosts: all
   become: false

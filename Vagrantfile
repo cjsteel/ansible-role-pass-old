@@ -19,9 +19,9 @@ Vagrant.configure(2) do |config|
     xenial.vm.box = "ubuntu/xenial64"
   end
 
-  config.vm.define "centos7" do |centos7|
-    centos7.vm.box = "centos/7"
-  end
+#  config.vm.define "centos7" do |centos7|
+#    centos7.vm.box = "centos/7"
+#  end
 
 #  config.vm.define "fedora22" do |fedora22|
 #    fedora22.vm.box = "box-cutter/fedora22"

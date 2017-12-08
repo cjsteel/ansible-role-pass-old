@@ -38,8 +38,13 @@
 #  command: make install chdir={{pass_home}}/password-store-{{pass_version}} creates=/usr/bin/pass
 #  become: yes
 
+- shell: gpg2 --list-keys | grep pub | grep -o -P '(?<=/)[A-Z0-9]{8}'
+  register: pass_gpg_key_id
+
+- debug: var=pass_gpg_key_id.stdout
+
 - name: Initialize pass
-  command: pass init "{{pass_gpg_key}}" creates=~/.password-store/
+  command: pass init "{{ pass_gpg_key_id.stdout }}" creates=~/.password-store/
 
 - name: Create git repository
   command: pass git init creates=~/.password-store/.git

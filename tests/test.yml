@@ -20,10 +20,9 @@
 
   roles:
 
-    - epel
+#    - epel
     - haveged
     - { role: gpg, ansible_user: ubuntu }
-#    - ansible
 
 - hosts: all
   become: false

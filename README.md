@@ -1,12 +1,15 @@
-[![Build Status](https://travis-ci.org/lbischof/ansible-role-pass.svg?branch=master)](https://travis-ci.org/lbischof/ansible-role-pass)
-[![Galaxy Role](https://img.shields.io/badge/ansible--galaxy-pass-blue.svg)](https://galaxy.ansible.com/lbischof/pass/)
+[![Build Status](https://travis-ci.org/cjsteel/ansible-role-pass.svg?branch=master)](https://travis-ci.org/cjsteel/ansible-role-pass)
+[![Galaxy Role](https://img.shields.io/badge/ansible--galaxy-pass-blue.svg)](https://galaxy.ansible.com/cjsteel/pass/)
 
 
-Pass Ansible Role
+ansible-role-pass
 ====
 
 [pass](http://www.passwordstore.org) is a very simple password store that keeps passwords inside gpg encrypted files inside a simple directory tree. The pass utility provides a series of commands for manipulating the password store, allowing the user to add, remove, edit, synchronize, generate, and manipulate passwords.
 
+## Notes
+
+The gpg key passphrase can be found on the controller in `/tmp/passwordfile`
 
 Requirements
 ------------
@@ -35,6 +38,10 @@ Example Playbook
   roles:
     - lbischof.pass
 ```
+
+## References
+
+* [how-to-ultimately-trust-a-public-key-non-interactively.html](https://blog.tersmitten.nl/how-to-ultimately-trust-a-public-key-non-interactively.html)
 
 License
 -------

@@ -34,10 +34,6 @@
   command: make install chdir={{ pass_home }}/password-store-{{ pass_version }} creates=~/bin/pass
   become: yes
 
-#- name: Run make install
-#  command: make install chdir={{pass_home}}/password-store-{{pass_version}} creates=/usr/bin/pass
-#  become: yes
-
 - shell: gpg2 --list-keys | grep pub | grep -o -P '(?<=/)[A-Z0-9]{8}'
   register: pass_gpg_key_id
 

@@ -2,6 +2,9 @@
 - hosts: all
   become: true
   gather_facts: false
+  vars:
+
+  - pass_install_dependencies: true
 
   pre_tasks:
 
@@ -21,8 +24,9 @@
   roles:
 
 #    - epel
-    - haveged
-    - { role: gpg, ansible_user: ubuntu }
+    - { role: epel, when: ansible_os_family == 'CentOS' and pass_install_dependencies }
+    - { role: haveged, when: pass_install_dependencies }
+    - { role: gpg, ansible_user: ubuntu, when: ansible_os_family == 'Darwin' and pass_install_dependencies }
 
 - hosts: all
   become: false

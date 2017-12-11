@@ -57,9 +57,45 @@
   command: git remote add origin {{pass_git_remote}} chdir=~/.password-store
   when: pass_git_remote is defined and not pass_remotes.stdout
 
+##########################################
+#
+# using command module
+#
+- name: "command test-01 add or overwrite entry for Email/gmail.com"
+  command: "pass generate Workstations/{{ ansible_hostname }}/admin 15"
+  register: pass_generate_password
+
+- name: "print test-01 value of pass_generate_password"
+  debug: var=pass_generate_password
+
+- name: "print test-01 value of pass_generate_password.stdout_lines"
+  debug: var=pass_generate_password.stdout_lines
+
+- name: "command test-01 output entry for Email/gmail.com"
+  command: "pass Workstations/{{ ansible_hostname }}/admin 15"
+  register: pass_password_output
+
+- name: "print test-01 value of pass_generate_password.stdout_lines"
+  debug: var=pass_password_output
+
+# This gives us our current value for the password:
+
+- name: "print test-01 value of pass_generate_password.stdout_lines"
+  debug: var=pass_password_output.stdout
+
+# Requires passlib
+
+- name: "Change admin password"
+  become: true
+  user: name=tester update_password=always password="{{ pass_password_output.stdout|password_hash('sha512') }}"
+
+#  user: name=tester update_password=always password="{{ 'passwordsaresecret'|password_hash('sha512') }}"
+  
+
 ############################################3
 #
 # passwordstore.py
+
 
 # Debug is used for examples, BAD IDEA to show passwords on screen
 #- name: Basic lookup. Fails if example/test doesn't exist
@@ -68,27 +104,20 @@
 #- name: Create pass with random 16 character password. If password exists just give the password
 #  debug: var=mypassword
 #  vars:
-#    mypassword: "{{ lookup('passwordstore', 'example/test create=true')}}"
+#    mypassword: "{{ lookup('passwordstore', 'example/test-01')}}"
+
+
+#- name: Create pass with random 16 character password. If password exists just give the password
+#  debug: var=mypassword
+#  vars:
+#    mypassword: "{{ lookup('passwordstore', 'example/test-01 create=true')}}"
 
 #- name: Different size password
-#  debug: msg="{{ lookup('passwordstore', 'example/test create=true length=42')}}"
+#  debug: msg="{{ lookup('passwordstore', 'example/test-02 create=true length=42')}}"
 
 #- name: Create pass with random 16 character password. If password exists just give the password
 #  debug: var=pass_hosts_password
 #  vars:
-#    pass_hosts_password: "{{ lookup('password', '/tmp/{{ ansible_hostname }} #chars=ascii_letters,digits,hexdigits,punctuation') }}"
+#    pass_hosts_password: "{{ lookup('password', '/tmp/{{ ansible_hostname }} chars=ascii_letters,digits,hexdigits,punctuation') }}"
 
-##########################################
-#
-# using command module
-#
-#- name: "command test1"
-#  command: "pass generate Email/jasondonenfeld.com 15"
-#  register: pass_generate_password
-
-#- name: "print value of pass_generate_password"
-#  debug: var=pass_hosts_password
-
-#- name: "command test2"
-#  command: "pass Email/jasondonenfeld.com 15"
 

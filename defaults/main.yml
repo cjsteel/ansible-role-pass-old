@@ -1,5 +1,7 @@
 --- # pass/defaults/main.yml
 
+pass_install_dependencies: true
+
 pass_git_remote: somegiturlhere  # for privacy set in group_vars/pass/defaults.yml
 pass_gpg_key: F5AKE5X7           # fake ID, for privacy set in group_vars/pass/defaults.yml
 pass_version: 1.6.5

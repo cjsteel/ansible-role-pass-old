@@ -59,7 +59,7 @@
 
 ##########################################
 #
-# using command module
+# using command module to generate passwordstore passwords
 #
 - name: "command test-01 add or overwrite entry for Email/gmail.com"
   command: "pass generate Workstations/{{ ansible_hostname }}/admin 15"
@@ -83,7 +83,7 @@
 - name: "print test-01 value of pass_generate_password.stdout_lines"
   debug: var=pass_password_output.stdout
 
-# Requires passlib
+# Requires passlib ?
 
 - name: "Change admin password"
   become: true
@@ -91,33 +91,4 @@
 
 #  user: name=tester update_password=always password="{{ 'passwordsaresecret'|password_hash('sha512') }}"
   
-
-############################################3
-#
-# passwordstore.py
-
-
-# Debug is used for examples, BAD IDEA to show passwords on screen
-#- name: Basic lookup. Fails if example/test doesn't exist
-#  debug: msg="{{ lookup('passwordstore', 'example/test')}}"
-
-#- name: Create pass with random 16 character password. If password exists just give the password
-#  debug: var=mypassword
-#  vars:
-#    mypassword: "{{ lookup('passwordstore', 'example/test-01')}}"
-
-
-#- name: Create pass with random 16 character password. If password exists just give the password
-#  debug: var=mypassword
-#  vars:
-#    mypassword: "{{ lookup('passwordstore', 'example/test-01 create=true')}}"
-
-#- name: Different size password
-#  debug: msg="{{ lookup('passwordstore', 'example/test-02 create=true length=42')}}"
-
-#- name: Create pass with random 16 character password. If password exists just give the password
-#  debug: var=pass_hosts_password
-#  vars:
-#    pass_hosts_password: "{{ lookup('password', '/tmp/{{ ansible_hostname }} chars=ascii_letters,digits,hexdigits,punctuation') }}"
-
 

@@ -11,3 +11,4 @@ pass_packages:
     - git
     - make
     - pwgen
+#    - gnupg2

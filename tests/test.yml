@@ -26,7 +26,7 @@
 #    - epel
     - { role: epel, when: ansible_os_family == 'CentOS' and pass_install_dependencies }
     - { role: haveged, when: pass_install_dependencies }
-    - { role: gpg, ansible_user: ubuntu, when: ansible_os_family == 'Darwin' and pass_install_dependencies }
+    - { role: gpg, ansible_user: ubuntu, when: ansible_os_family == 'Debian' and pass_install_dependencies }
 
 - hosts: all
   become: false
